@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Button } from './ui/button.jsx';
 
 function NavigationButtons({ onNext, onPrev }) {
@@ -8,5 +9,10 @@ function NavigationButtons({ onNext, onPrev }) {
     </div>
   );
 }
+
+NavigationButtons.propTypes = {
+  onNext: PropTypes.func.isRequired,
+  onPrev: PropTypes.func.isRequired,
+};
 
 export default NavigationButtons;

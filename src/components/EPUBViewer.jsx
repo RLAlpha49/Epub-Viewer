@@ -1,58 +1,55 @@
-import { useEffect, useRef, useState } from 'react';
-import ePub from 'epubjs';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Page from './Page.jsx';
 import NavigationButtons from './NavigationButtons.jsx';
+import ePub from 'epubjs';
 
 function EPUBViewer({ file }) {
-  const viewerRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(0);
   const [book, setBook] = useState(null);
   const [rendition, setRendition] = useState(null);
 
   useEffect(() => {
-    console.log('EPUBViewer component rendered');
-  }, []);
-
-  useEffect(() => {
-    if (file) {
+    if (file && !book) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        const book = ePub(event.target.result);
-        setBook(book);
-        const rendition = book.renderTo(viewerRef.current, {
+        const newBook = ePub(event.target.result);
+        setBook(newBook);
+        const newRendition = newBook.renderTo(document.createElement('div'), {
           width: '100%',
           height: '100%',
         });
-        setRendition(rendition);
-        rendition.display().then(() => {
-          const spine = book.spine;
-          if (spine && spine.items.length > 1 && spine.items[0].properties.includes('cover-image')) {
-            rendition.next();
-          }
-        });
+        setRendition(newRendition);
       };
       reader.readAsArrayBuffer(file);
     }
-  }, [file]);
+  }, [file, book]);
 
   const handleNext = () => {
-    if (rendition) {
-      rendition.next();
-    }
+    setCurrentPage((prevPage) => prevPage + 2);
   };
 
   const handlePrev = () => {
-    if (rendition) {
-      rendition.prev();
-    }
+    setCurrentPage((prevPage) => Math.max(prevPage - 2, 1));
   };
 
   return (
     <div>
-      <div className="epub-container" style={{ width: '100%', height: '80vh', border: '1px solid #ccc', overflow: 'auto' }}>
-        <div ref={viewerRef} style={{ width: '100%', height: '100%' }}></div>
+      <div className="epub-container" style={{ width: '100%', height: '80vh', border: '1px solid #ccc', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '50%', height: '100%' }}>
+          <Page key={`page-${currentPage}`} book={book} rendition={rendition} pageNumber={currentPage} />
+        </div>
+        <div style={{ width: '50%', height: '100%' }}>
+          <Page key={`page-${currentPage + 1}`} book={book} rendition={rendition} pageNumber={currentPage + 1} />
+        </div>
       </div>
       <NavigationButtons onNext={handleNext} onPrev={handlePrev} />
     </div>
   );
 }
+
+EPUBViewer.propTypes = {
+  file: PropTypes.object.isRequired,
+};
 
 export default EPUBViewer;

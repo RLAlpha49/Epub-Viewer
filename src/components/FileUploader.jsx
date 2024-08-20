@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Button } from "../components/ui/button";
+import PropTypes from 'prop-types';
+import { Button } from "./ui/button.jsx";
 
 function FileUploader({ onFileSelect }) {
   const [file, setFile] = useState(null);
@@ -28,5 +29,9 @@ function FileUploader({ onFileSelect }) {
     </div>
   );
 }
+
+FileUploader.propTypes = {
+  onFileSelect: PropTypes.func.isRequired,
+};
 
 export default FileUploader;
