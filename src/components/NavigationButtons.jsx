@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
-import { Button } from './ui/button.jsx';
+import { Button } from './ui/button';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 function NavigationButtons({ onNext, onPrev }) {
   return (
     <div style={{ textAlign: 'center', marginTop: '10px' }}>
-      <Button onClick={onPrev}>Previous</Button>
-      <Button onClick={onNext}>Next</Button>
+      <Button onClick={onPrev}>
+        <ArrowLeft />
+      </Button>
+      <Button onClick={onNext}>
+        <ArrowRight />
+      </Button>
     </div>
   );
 }
