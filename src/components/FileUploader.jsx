@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from "./ui/button.jsx";
+import { Button } from "./shadcn/ui/button";
 
 function FileUploader({ onFileSelect }) {
   const [file, setFile] = useState(null);

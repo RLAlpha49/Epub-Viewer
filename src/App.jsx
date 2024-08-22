@@ -2,8 +2,8 @@ import { useState } from 'react';
 import FileUploader from './components/FileUploader';
 import EPUBViewer from './components/EPUBViewer';
 import './App.css';
-import { ModeToggle } from './components/mode-toggle';
-import { ThemeProvider } from './components/theme-provider';
+import { ModeToggle } from './components/shadcn/mode-toggle';
+import { ThemeProvider } from './components/shadcn/theme-provider';
 
 function App() {
   const [file, setFile] = useState(null);
