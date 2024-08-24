@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button } from './shadcn/ui/button.jsx';
+import { Button } from './ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 function NavigationButtons({ onNext, onPrev }) {
