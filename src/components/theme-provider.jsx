@@ -58,11 +58,6 @@ export function ThemeProvider({ children, defaultTheme = "system", storageKey = 
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
-      /**
-       * Custom hook to access the current theme context
-       * @returns {Object} The current theme context
-       * @throws {Error} If used outside of a ThemeProvider
-       */
       {children}
     </ThemeProviderContext.Provider>
   );
