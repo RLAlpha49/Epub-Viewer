@@ -4,6 +4,17 @@ import Page from './Page.jsx';
 import NavigationButtons from './NavigationButtons.jsx';
 import ePub from 'epubjs';
 
+/**
+ * EPUBViewer component for rendering and navigating EPUB files
+ * @param {File} file - The EPUB file to be displayed
+ * @returns {JSX.Element} A component that displays two pages of the EPUB file side by side with navigation buttons
+ */
+/**
+ * Initializes an ePub book from a file and sets up its rendition
+ * @param {File} file - The ePub file to be loaded
+ * @param {Book|null} book - The current book object, if any
+ * @returns {void} This effect does not return a value, but updates state
+ */
 function EPUBViewer({ file }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [book, setBook] = useState(null);
@@ -12,6 +23,11 @@ function EPUBViewer({ file }) {
   useEffect(() => {
     if (file && !book) {
       const reader = new FileReader();
+      /**
+       * Handles the file reader's load event for an EPUB file
+       * @param {Event} event - The load event from the FileReader
+       * @returns {void} This function doesn't return a value
+       */
       reader.onload = (event) => {
         const newBook = ePub(event.target.result);
         setBook(newBook);
@@ -25,10 +41,28 @@ function EPUBViewer({ file }) {
     }
   }, [file, book]);
 
+  /**
+   /**
+    * Increments the current page by 2
+    * @param {function} prevPage - A function that returns the previous page number
+    * @returns {void} No return value
+    /**
+     * Decrements the current page number by 2, ensuring it doesn't go below 1.
+     * @param {function} setCurrentPage - React state setter function for updating the current page.
+     * @returns {void} This function doesn't return a value, it updates state.
+     */
+    */
+   * Increments the current page number by 2.
+   * @returns {void} This function doesn't return a value.
+   */
   const handleNext = () => {
     setCurrentPage((prevPage) => prevPage + 2);
   };
 
+  /**
+   * Decrements the current page number by 2, ensuring it doesn't go below 1.
+   * @returns {void} This function doesn't return a value.
+   */
   const handlePrev = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 2, 1));
   };
