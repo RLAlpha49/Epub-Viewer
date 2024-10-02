@@ -18,13 +18,11 @@ const ThemeProviderContext = createContext({
  * @returns {JSX.Element} A ThemeProviderContext.Provider wrapping the children with the current theme value.
  */
 export function ThemeProvider({ children, defaultTheme = "system", storageKey = "vite-ui-theme", ...props }) {
-  ```
   /**
    * Custom React hook to manage and persist the theme state
    * @param {void} No parameters
    * @returns {[string, function]} A tuple containing the current theme value and a function to update it
    */
-  ```
   const [theme, setTheme] = useState(() => localStorage.getItem(storageKey) || defaultTheme);
 
   /**
