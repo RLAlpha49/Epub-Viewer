@@ -5,10 +5,18 @@ import './App.css';
 import { ModeToggle } from './components/mode-toggle';
 import { ThemeProvider } from './components/theme-provider';
 
+/**
+ * Main App component for the EPUB Viewer application
+ * @returns {JSX.Element} The rendered App component
+ */
 function App() {
   const [file, setFile] = useState(null);
   const [showViewer, setShowViewer] = useState(false);
 
+  /**
+   * Handles the action to show the viewer
+   * @returns {void} This function doesn't return a value
+   */
   const handleShowViewer = () => {
     setShowViewer(true);
   };
