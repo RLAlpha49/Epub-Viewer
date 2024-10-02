@@ -8,6 +8,10 @@ import {
 } from "./ui/dropdown-menu.jsx";
 import { useTheme } from "./theme-provider.jsx";
 
+/**
+ * Renders a dropdown menu component for toggling between light, dark, and system themes.
+ * @returns {JSX.Element} A DropdownMenu component with theme toggle functionality.
+ */
 export function ModeToggle() {
   const { setTheme } = useTheme();
 
